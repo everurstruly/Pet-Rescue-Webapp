@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_supportive_programs_methods_and_tools",
+  "info": {
+    "displayName": "MethodsAndTools"
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "webpage-section.header"
+    },
+    "programGroup": {
+      "displayName": "DisplayCard",
+      "type": "component",
+      "repeatable": true,
+      "component": "common.display-card"
+    }
+  }
+}

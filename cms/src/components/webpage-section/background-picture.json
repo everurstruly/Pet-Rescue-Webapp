@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_section_generic_background_pictures",
+  "info": {
+    "displayName": "backgroundPicture",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "photo",
+        "video"
+      ]
+    },
+    "media": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

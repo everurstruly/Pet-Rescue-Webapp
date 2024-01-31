@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_reasons_to_get_a_pet_listings",
+  "info": {
+    "displayName": "Listing"
+  },
+  "options": {},
+  "attributes": {
+    "reasonListing": {
+      "type": "component",
+      "repeatable": true,
+      "component": "reasons-to-get-a-pet.reason"
+    }
+  }
+}

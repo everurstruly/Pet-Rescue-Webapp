@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_common_display_cards",
+  "info": {
+    "displayName": "DisplayCard",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "subheading": {
+      "type": "text"
+    },
+    "body": {
+      "type": "text"
+    }
+  }
+}

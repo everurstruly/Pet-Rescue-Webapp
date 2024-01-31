@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_reasons_to_get_a_pet_centered_reasons",
+  "info": {
+    "displayName": "CenteredReason",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "reason": {
+      "type": "component",
+      "repeatable": false,
+      "component": "reasons-to-get-a-pet.reason"
+    }
+  }
+}

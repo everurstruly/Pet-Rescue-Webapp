@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_section_common_interface_ctas",
+  "info": {
+    "displayName": "CTA",
+    "icon": "apps",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "disabled": {
+      "type": "boolean"
+    },
+    "theme": {
+      "type": "string"
+    },
+    "tooltip": {
+      "type": "string"
+    },
+    "href": {
+      "type": "string"
+    },
+    "tabOpenBehaviour": {
+      "type": "enumeration",
+      "enum": [
+        "open new",
+        "overwrite current"
+      ]
+    },
+    "positionInGroup": {
+      "type": "integer"
+    },
+    "hidden": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,654 @@
+"use client";
+
+import classNames from "classnames";
+import Link from "next/link";
+// import { useAppStore } from "./app";
+import { useEffect, useState } from "react";
+import { BiChevronDown, BiMenu, BiUserCircle, BiXCircle } from "react-icons/bi";
+import clsx from "clsx";
+
+const useStore = () => void;
+
+export const drawer = "top-navigation";
+
+const navigationMenuData = [
+  {
+    title: "Home",
+    url: "/",
+  },
+  {
+    title: "Find a Pet",
+    url: "/pets",
+  },
+  {
+    title: "Supportive Programs",
+    url: "/assist",
+    menu: [
+      {
+        title: "Donations",
+        url: "",
+      },
+      {
+        title: " Adoption Counseling Sessions",
+        url: "counselling",
+      },
+      {
+        title: "Volunteering Opportunitites",
+        url: "volunteer",
+        menu: [
+          {
+            title: "Adoption Coordinator",
+            url: "",
+          },
+          {
+            title: "Social Media Management",
+            url: "",
+          },
+          {
+            title: "Transport Drivers",
+            url: "",
+          },
+          {
+            title: "Administrative Support",
+            url: "",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Guides and Articles",
+    url: "/blog",
+    menu: [
+      {
+        title: "Real-World Love stories",
+        url: "",
+        menu: [
+          {
+            title: "Connecting hearts and strengthening ties __ref(PetRescue)",
+            url: "",
+          },
+          {
+            title: "Man vs Dog: The Battle of the Couch __ref(PetRescue)",
+            url: "",
+          },
+          {
+            title: "Do dreams come true __ref(PetRescue)",
+            url: "",
+          },
+          {
+            title: "Adventure Cat: Meet Juniper __ref(PetRescue)",
+            url: "",
+          },
+        ],
+      },
+      {
+        title: " Pet Adoption Resources",
+        url: "articles",
+        menu: [
+          {
+            title:
+              "Tips for multi-pet households __ref(PetRescue.com homepage)",
+            url: "",
+          },
+          {
+            title:
+              "A Guide to adopting a pet during covid-19 lockdown __ref(PetRescue)",
+            url: "",
+          },
+          {
+            title:
+              "Sending Adoption applications: What you need to know __ref(PetRescue)",
+            url: "",
+          },
+          {
+            title:
+              "Why you may not have heard back about your application __ref(PetRescue)",
+            url: "",
+          },
+          {
+            title:
+              "Recommended qualifications for force-free dog trainers __ref(PetRescue)",
+            url: "",
+          },
+        ],
+      },
+      {
+        title: "Pet Care and Support",
+        url: "/care",
+        menu: [
+          {
+            title: "How will I know when its time __ref(PetRescue)",
+            url: "",
+          },
+          {
+            title: "The Guide to adopting a dog or cat __ref(PetRescue)",
+            url: "",
+          },
+          {
+            title: "How will I know when its time __ref(PetRescue)",
+            url: "",
+          },
+          {
+            title:
+              "Recommended qualifications for force-free dog trainers __ref(PetRescue)",
+            url: "",
+          },
+          {
+            title:
+              "Finding the right dog trainer: A positive training Guide __ref(PetRescue)",
+            url: "",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Help Centre",
+    url: "",
+    menu: [
+      {
+        title: "Who are we?",
+        menu: [
+          {
+            title: "",
+            writing: `Hi`,
+          },
+        ],
+      },
+      {
+        title: "Sponsor Development Team",
+        menu: [
+          {
+            // behaviour
+            title: "",
+            outcome: "dev->sponsor->methods",
+          },
+        ],
+      },
+    ],
+  },
+];
+
+const declaredString = (value: any) => {
+  return typeof value === "string" && value !== undefined ? true : false;
+};
+
+type NavMenuListItem = {
+  title: string;
+  url?: string;
+  menu?: Array<
+    | NavMenuListItem & {
+        writing?: string;
+        outcome?: string;
+      }
+  >;
+};
+
+type NavMenuListItemProps = NavMenuListItem & {
+  id: number;
+  menuListBelongingTo: {
+    isChildMenuList?: boolean;
+    toggleParentMenuList?: (...args: any[]) => any;
+    handleClickItem: any;
+    handleClickItemToggle: any;
+    shouldOpenItemMenu: (id: number) => boolean;
+  };
+};
+
+function NavMenuListItem({
+  id,
+  title,
+  url,
+  menu,
+  menuListBelongingTo,
+}: NavMenuListItemProps) {
+  const { handleClickItem, handleClickItemToggle, shouldOpenItemMenu } =
+    menuListBelongingTo;
+
+  const toggleParentMenuList = (show: boolean) => {
+    handleClickItem(id, show);
+  };
+
+  return (
+    <li
+      key={id}
+      className="xl:relative cursor-pointer"
+      onMouseOver={() => handleClickItemToggle(id, true)}
+      onMouseLeave={() => handleClickItemToggle(id, false)}
+    >
+      {!menu && declaredString(url) && (
+        <Link
+          href={url as string}
+          onClick={() => handleClickItem(id, false)}
+          className="flex px-5 py-2 xl:px-3 xl:py-7 text-amber-950 xl:text-amber-800 underline-offset-4 cursor-pointer hover:xl:text-black bg-amber-50 rounded-lg"
+        >
+          {title}
+        </Link>
+      )}
+      {menu && !declaredString(url) && (
+        <button
+          onClick={() => handleClickItemToggle(id)}
+          // onMouseEnter={() => toggleDropdownVisibility(true)}
+          // onMouseLeave={() => toggleDropdownVisibility(false)}
+          className="flex px-5 py-2 xl:px-3 xl:py-7 text-amber-950 xl:text-amber-800 underline-offset-4 cursor-pointer hover:xl:text-black bg-amber-50 rounded-lg"
+        >
+          {title}
+        </button>
+      )}
+      {menu && declaredString(url) && (
+        <div className="flex">
+          <Link
+            href={url as string}
+            className="flex px-5 py-2 xl:px-3 xl:py-7 text-amber-950 xl:text-amber-800 underline-offset-4 cursor-pointer hover:xl:text-black bg-amber-50 rounded-lg"
+          >
+            {title}
+          </Link>
+          <button
+            onClick={() => handleClickItemToggle(id)}
+            className="px-2 font-medium text-lg"
+          >
+            <BiChevronDown />
+          </button>
+        </div>
+      )}
+      {menu && (
+        <NavMenuList
+          isChildMenuList={true}
+          toggleParentMenuList={toggleParentMenuList}
+          items={menu}
+          className={clsx("ms-3", {
+            block: shouldOpenItemMenu(id),
+            hidden: !shouldOpenItemMenu(id),
+          })}
+        />
+      )}
+    </li>
+  );
+}
+
+function NavMenuList({
+  items,
+  isChildMenuList,
+  toggleParentMenuList,
+  className,
+}: {
+  isChildMenuList?: boolean;
+  toggleParentMenuList?: (...args: any[]) => any;
+  items: Exclude<NavMenuListItem["menu"], undefined>;
+  className?: string;
+}) {
+  const appStore = useAppStore();
+  const [activeItemMenu, setActiveItemMenu] = useState<{
+    id: number;
+    open: boolean;
+  }>();
+
+  const handleClickItemToggle = (id: number, show?: boolean) => {
+    setActiveItemMenu((currActiveSubMenu) => {
+      if (currActiveSubMenu === undefined || currActiveSubMenu.id !== id) {
+        return { id, open: show ? show : true };
+      }
+      return {
+        id,
+        open: show ? show : !currActiveSubMenu.open,
+      };
+    });
+  };
+
+  const handleClickItem = (id: number, show?: boolean) => {
+    handleClickItemToggle(id, show);
+    if (isChildMenuList) {
+      toggleParentMenuList && toggleParentMenuList(false);
+    }
+    appStore.dispatch({
+      type: "drawer/display",
+      payload: { drawer, show: false },
+    });
+  };
+
+  const shouldOpenItemMenu = (id: number) => {
+    if (!activeItemMenu) return false;
+    return activeItemMenu.id === id && activeItemMenu.open;
+  };
+
+  return (
+    <ul className={clsx(className)}>
+      {items.map((item, index) => {
+        return (
+          <NavMenuListItem
+            id={index}
+            {...item}
+            menuListBelongingTo={{
+              isChildMenuList,
+              toggleParentMenuList,
+              handleClickItem,
+              handleClickItemToggle,
+              shouldOpenItemMenu,
+            }}
+          />
+        );
+      })}
+    </ul>
+  );
+}
+
+function BrandLogo() {
+  return (
+    <div className="me-auto flex items-end gap-x-1 text-base min-[260px]:text-lg sm:text-xl pe-3 xl:text-2xl font-semibold">
+      <button className="relative inline-block px-1 rotate-6 before:absolute before:top-0 before:inset-0 before:border-2 before:-rotate-6 before:border-gray-900 before:border-y-amber-600 bg-black text-amber-950 xl:text-[85%]">
+        !D
+      </button>{" "}
+      <span className="text-amber-800 leading-[1.2rem] hidden min-[460px]:inline-block">
+        ThePetRadar
+      </span>
+    </div>
+  );
+}
+
+export default function TopNavigationSection() {
+  const appStore = useAppStore();
+  const menuOpen = appStore.visibleAppNavigationDrawer === drawer;
+
+  const openMenu = () => {
+    return appStore.dispatch({
+      type: "drawer/display",
+      payload: { drawer, show: true },
+    });
+  };
+
+  const closeMenu = () => {
+    return appStore.dispatch({
+      type: "drawer/display",
+      payload: { drawer, show: false },
+    });
+  };
+
+  return (
+    <nav className="bg-amber-50">
+      <div className="flex items-center xl:mx-auto gap-x-2 min-[384px]:gap-x-2 md:px-2 xl:px-10 px-4 xl:pt-2 xl:container">
+        <BrandLogo />
+
+        <div
+          className={classNames(
+            `bg-black z-[100] fixed inset-0 xl:!hidden bg-opacity-0 pointer-events-none transition-all duration-300`,
+            {
+              "bg-opacity-60 pointer-events-auto": menuOpen,
+            }
+          )}
+          onClick={closeMenu}
+        ></div>
+        <section
+          className={classNames(
+            `fixed z-[100] rounded-xl xl:flex m-[auto] h-[calc(100vh_-_2.5rem)] w-[calc(100vw_-_2.5rem)] overflow-y-auto inset-0 sm:w-[80%] md:w-[45%].. xl:w-full xl:pt-0 xl:h-auto xl:static xl:overflow-y-auto xl:mx-auto bg-amber-50 xl:bg-transparent opacity-0 translate-y-4 xl:translate-y-0 xl:opacity-100 shadow-lg transition-all duration-300 pointer-events-none`,
+            {
+              "!translate-y-0 opacity-100 pointer-events-auto": menuOpen,
+            }
+          )}
+        >
+          <header className="flex">
+            <button className="ms-auto p-3 text-amber-800" onClick={closeMenu}>
+              <BiXCircle className="text-4xl" />
+            </button>
+          </header>
+          <NavMenuList
+            items={navigationMenuData}
+            className="w-full justify-stretch xl:justify-center font-medium xl:flex xl:gap-x-3 py-2"
+          />
+        </section>
+
+        <div>
+          <button className="grid place-content-center xl:hidden">
+            <BiUserCircle className="text-3xl text-amber-800" />
+          </button>
+          <div className="hidden xl:flex items-center gap-x-2 min-[384px]:gap-x-2 xl:capitalize">
+            <Link
+              href="/sign/in"
+              className="rounded-full inline-flex items-center font-medium bg-amber-800 text-amber-950 leading-none py-2 px-4 min-[360px]:px-6 min-[280px]:py-3 min-[340px]:text-sm xl:text-base xl:whitespace-nowrap sm:py-2 xl:px-5 xl:py-2 xl:font-medium shadow shadow-amber-400"
+            >
+              Sign in
+            </Link>
+            <Link
+              href="/sign/up"
+              className="rounded-full inline-flex items-center leading-none text-xs py-2 px-4 min-[360px]:px-6 min-[280px]:py-3 min-[340px]:text-sm xl:whitespace-nowrap sm:py-2 xl:px-4 xl:py-2 text-amber-800 xl:font-medium shadow shadow-amber-400"
+            >
+              Sign up
+            </Link>
+          </div>
+        </div>
+
+        <button
+          className="ps-4 py-3.5 h-full xl:hidden flex items-center gap-x-1 font-semibold text-amber-800 text-lg"
+          onClick={openMenu}
+        >
+          <BiMenu className="text-4xl  text-amber-800" />
+          {/* w-6 h-6 min-[280px]:h-7 min-[280px]:w-7 */}
+        </button>
+      </div>
+    </nav>
+  );
+}
+
+const obseleteNavMenuList = () => {
+  return (
+    <ul className="w-full justify-stretch xl:justify-center font-medium xl:flex xl:gap-x-3 px-2 py-4">
+      {navigationMenuData.map(({ title, url, menu }, index) => {
+        return (
+          <li key={index} className="relative cursor-pointer">
+            {!url ? null : (
+              <Link
+                href={url as string}
+                // onClick={() => closeMenu()}
+                className="flex px-3 py-1.5 xl:px-3 xl:py-7 text-amber-900 hover:text-black underline-offset-4 cursor-pointer xl:text-black bg-amber-50 rounded-lg"
+              >
+                {title}
+              </Link>
+            )}
+            {url ? null : (
+              <button
+                // onClick={() => closeMenu()}
+                className="flex px-3 py-1.5  xl:px-3 xl:py-7 text-amber-900 hover:xl:text-black"
+              >
+                {title}
+              </button>
+            )}
+            {!menu ? null : (
+              <ul className="ms-3">
+                {menu.map(({ title }) => {
+                  return (
+                    <li>
+                      <Link href="#" className="flex py-1.5 px-3">
+                        {title}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </li>
+        );
+      })}
+      {/*  <li className="relative">
+              <Link
+                href="/pets"
+                onClick={() => closeMenu()}
+                className="flex px-4 py-2 xl:px-3 xl:py-7 text-amber-950 xl:text-amber-800 underline-offset-4 cursor-pointer hover:xl:text-black"
+              >
+                Find a Pet
+              </Link>
+            </li>
+            <li className="relative">
+              <ul className="p-2 ms-4">
+                <li>
+                  <Link href="#">Counseling Sessions</Link>
+                </li>
+                <li>
+                  <button onClick={() => closeMenu()}>
+                    Volunteer Opportunities
+                  </button>
+                  <ul>
+                    {[
+                      { title: "Adoption Coordinator", href: "/" },
+                      { title: "Social Media Management", href: "/" },
+                      { title: "Administration Support", href: "/" },
+                      { title: "Transportation Mercant", href: "/" },
+                    ].map(({ title, href }) => {
+                      return (
+                        <li>
+                          <Link href={href}>{title}</Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </li>
+                <li>
+                  <button onClick={() => closeMenu()}>
+                    Support Developement Team
+                  </button>
+                  <ul>
+                    <li>Give project a star on github</li>
+                    <li>Sponsor</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <Link
+                href="/blog"
+                onClick={() => closeMenu()}
+                className="flex px-4 py-2 xl:px-3 xl:py-7 text-amber-950 xl:text-amber-800 underline-offset-4 cursor-pointer hover:xl:text-black"
+              >
+                Guides and Articles
+              </Link>
+              <ul>
+                <li>
+                  <button onClick={() => closeMenu()}>Love Stories</button>
+                  <ul>
+                    {[
+                      { title: "Adoption Coordinator", href: "/" },
+                      { title: "Social Media Management", href: "/" },
+                      { title: "Administration Support", href: "/" },
+                      { title: "Transportation Mercant", href: "/" },
+                    ].map(({ title, href }) => {
+                      return (
+                        <li>
+                          <Link href={href}>{title}</Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </li>
+                <li>
+                  <button onClick={() => closeMenu()}>Pet Adoption</button>
+                  <ul>
+                    <li>Give project a star on github</li>
+                    <li>Sponsor</li>
+                  </ul>
+                </li>
+                <li>
+                  <button onClick={() => closeMenu()}>
+                    Health and Support: Pet Care
+                  </button>
+                  <ul>
+                    <li>Give project a star on github</li>
+                    <li>Sponsor</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <button
+                onClick={() => closeMenu()}
+                className="flex px-4 py-2 xl:px-3 xl:py-7 text-amber-950 xl:text-amber-800 underline-offset-4 cursor-pointer hover:xl:text-black"
+              >
+                Help Centre
+              </button>
+              <ul>
+                <li>
+                  <button onClick={() => closeMenu()}>Who are we?</button>
+                  <article>
+                    <p>
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                      Minima delectus harum deleniti illum impedit aliquam
+                      laudantium, enim qui quis expedita.
+                    </p>
+                  </article>
+                </li>
+                <li>
+                  <Link href="emmanuel.vercel.app" onClick={() => closeMenu()}>
+                    Powered By: Development Case Study
+                  </Link>
+                </li>
+                <li>
+                  <Link href="emmanuel.vercel.app" onClick={() => closeMenu()}>
+                    Contact the Development Team
+                  </Link>
+                </li>
+              </ul>
+            </li> */}
+    </ul>
+  );
+};
+
+const ionKnowMan = (
+  menu: any,
+  index: any,
+  url: any,
+  handleClick: any,
+  handleClickToggle: any,
+  title: any,
+  shouldOpen: any
+) => {
+  return (
+    <li key={index} className="relative cursor-pointer">
+      {!menu && declaredString(url) && (
+        <Link
+          href={url as string}
+          onClick={() => handleClick(index)}
+          className="flex px-5 py-2 xl:px-3 xl:py-7 text-amber-950 xl:text-amber-800 underline-offset-4 cursor-pointer hover:xl:text-black bg-amber-50 rounded-lg"
+        >
+          {title}
+        </Link>
+      )}
+      {menu && !declaredString(url) && (
+        <button
+          onClick={() => handleClickToggle(index)}
+          // onMouseEnter={() => toggleDropdownVisibility(true)}
+          // onMouseLeave={() => toggleDropdownVisibility(false)}
+          className="flex px-5 py-2 xl:px-3 xl:py-7 text-amber-950 xl:text-amber-800 underline-offset-4 cursor-pointer hover:xl:text-black bg-amber-50 rounded-lg"
+        >
+          {title}
+        </button>
+      )}
+      {menu && declaredString(url) && (
+        <div
+          className="flex"
+          // onMouseEnter={() => toggleDropdownVisibility(true)}
+          // onMouseLeave={() => toggleDropdownVisibility(false)}
+        >
+          <Link
+            href={url as string}
+            className="flex px-5 py-2 xl:px-3 xl:py-7 text-amber-950 xl:text-amber-800 underline-offset-4 cursor-pointer hover:xl:text-black bg-amber-50 rounded-lg"
+          >
+            {title}
+          </Link>
+          <button
+            onClick={() => handleClickToggle(index)}
+            className="px-2 font-medium text-lg"
+          >
+            <BiChevronDown />
+          </button>
+        </div>
+      )}
+      {menu && (
+        <NavMenuList
+          items={menu}
+          className={clsx("ms-3", {
+            block: shouldOpen(index),
+            hidden: !shouldOpen(index),
+          })}
+        />
+      )}
+    </li>
+  );
+};

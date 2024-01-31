@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_reasons_to_get_a_pet_reasons",
+  "info": {
+    "displayName": "Reason"
+  },
+  "options": {},
+  "attributes": {
+    "party": {
+      "type": "string"
+    },
+    "statement": {
+      "type": "text"
+    }
+  }
+}

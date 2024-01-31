@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_common_non_relational_bookmarks",
+  "info": {
+    "displayName": "NonRelationalBookmark",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "mark": {
+      "type": "string"
+    }
+  }
+}

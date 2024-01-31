@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_pet_education_adoption_guides",
+  "info": {
+    "displayName": "adoptionGuides"
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "component",
+      "repeatable": true,
+      "component": "webpage-section.header"
+    },
+    "guideGroup": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.display-card"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_pages",
+  "info": {
+    "singularName": "home-page",
+    "pluralName": "home-pages",
+    "displayName": "HomePage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "displayName": "Hero",
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.hero"
+    },
+    "reasonsToAdopAPet": {
+      "displayName": "ReasonToAdopt",
+      "type": "component",
+      "repeatable": false,
+      "component": "pet-education.reason-to-adopt"
+    },
+    "featuredAdoptablePets": {
+      "displayName": "featuredAdoptablePets",
+      "type": "component",
+      "repeatable": false,
+      "component": "pet-listing.featured-adoptable-pets"
+    },
+    "supportiveInvolvement": {
+      "displayName": "MethodsAndTools",
+      "type": "component",
+      "repeatable": false,
+      "component": "supportive-programs.methods-and-tools"
+    },
+    "petAdoptionGuides": {
+      "displayName": "adoptionGuides",
+      "type": "component",
+      "repeatable": false,
+      "component": "pet-education.adoption-guides"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_section_generic_heroes",
+  "info": {
+    "displayName": "HeroBody",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "writing": {
+      "type": "richtext"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.cta"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_common_heroes",
+  "info": {
+    "displayName": "Hero",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "webpage-section.header"
+    },
+    "background": {
+      "type": "component",
+      "repeatable": false,
+      "component": "webpage-section.background-picture"
+    },
+    "illustration": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.image"
+    }
+  }
+}

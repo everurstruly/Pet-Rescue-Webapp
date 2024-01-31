@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_pet_listing_featured_adoptable_pets",
+  "info": {
+    "displayName": "featuredAdoptablePets"
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "webpage-section.header"
+    },
+    "petGroup": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.related-articles"
+    }
+  }
+}

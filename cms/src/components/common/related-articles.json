@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_common_related_articles",
+  "info": {
+    "displayName": "dataCriteria",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "by": {
+      "type": "enumeration",
+      "enum": [
+        "lastUpdated"
+      ]
+    },
+    "order": {
+      "type": "enumeration",
+      "enum": [
+        "ascending",
+        "descending"
+      ]
+    },
+    "contains": {
+      "type": "text"
+    },
+    "quantity": {
+      "type": "integer"
+    }
+  }
+}
