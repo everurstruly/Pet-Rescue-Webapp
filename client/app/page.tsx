@@ -216,9 +216,9 @@ export default function Home() {
                 </Link>
               </h3>
               <div className="mt-8 xl:mt-16 flex items-center justify-center gap-x-4">
-                {[BiLeftArrowAlt, BiRightArrowAlt].map((Icon) => {
+                {[BiLeftArrowAlt, BiRightArrowAlt].map((Icon, index) => {
                   return (
-                    <button className="rounded-full text-amber-900 bg-white grid place-conent-center p-3 shadow-md shadow-amber-400">
+                    <button key={index} className="rounded-full text-amber-900 bg-white grid place-conent-center p-3 shadow-md shadow-amber-400">
                       {<Icon className="text-2xl" />}
                     </button>
                   );
