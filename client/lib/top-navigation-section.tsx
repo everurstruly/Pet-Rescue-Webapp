@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import Link from "next/link";
-import { useAppStore } from "./app";
+import { useAppStore } from "@/components/app";
 import { useEffect, useState } from "react";
 import { BiChevronDown, BiMenu, BiUserCircle, BiXCircle } from "react-icons/bi";
 
