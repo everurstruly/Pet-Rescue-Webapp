@@ -102,7 +102,7 @@ export default function Home() {
             <div className="flex-grow flex flex-wrap gap-y-4 items-center gap-x-16">
               <div className="flex flex-wrap items-center gap-x-1">
                 <label htmlFor="specie" className="font-bold text-amber-900">
-                  I'm looking for:
+                  {"I'm looking for:"}
                 </label>
                 <select
                   name="species"
@@ -232,7 +232,7 @@ export default function Home() {
         <div className="xl:container lg:px-10">
           <header className="text-center text-amber-950 mb-20">
             <h4 className="text-amber-800 text-lg mb-2">
-              Let's get Educated. Let's Inspired
+              {"Let's get Educated. Let's Inspired"}
             </h4>
             <h2 className="font-serif text-4xl">Latest from Our Blog</h2>
           </header>
